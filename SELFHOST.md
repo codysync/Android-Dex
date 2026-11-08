@@ -20,8 +20,10 @@ Upstream is closed-source; this fork carries our packaging, mirror and rebrand, 
 ./patch/customise.sh --name "Fold DeX" <bundle>   # rebrand an install
 ```
 
-Customisation so far: name "Fold DeX", our tinted icon, version.json app_name, and a local
-mirror so downloads never touch GitHub. App logic is untouched because there is no source.
+Customisation so far: name "Fold DeX", our tinted icon, version.json app_name, the upstream
+"· Made with ❤️ by shrey113" credit blanked (`patch/no-credit.sh <libapp.so|App binary>`, re-run after
+every re-extract/upgrade, then `codesign --force --deep --sign -` on macOS), and a local mirror so
+downloads never touch GitHub. App logic is untouched because there is no source.
 
 ## Connect a machine
 

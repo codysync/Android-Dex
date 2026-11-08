@@ -31,3 +31,29 @@ adb connect 100.109.217.118:5555        # phone must have wireless debugging on
 The app ships its own adb (`Build_copy/adb-linux` or `adb-mac`); use that binary so it shares
 the app's adb server. Fold reboots drop the connection — reconnect once, then the app's device
 manager keeps it.
+
+## Privacy: it now runs entirely on our hardware
+
+Audit (2026-11-08) of the shipped binaries found exactly four hosts the app itself calls, plus
+links it opens only when clicked:
+
+| Host | Why | Served by |
+|---|---|---|
+| `api.github.com/repos/Shrey113/Android-Dex/releases/latest` | startup version check | `dex-edge`, tag from `selfhost/manifest.json` |
+| `ipinfo.io/json` | IP/geo widget | `dex-edge`, static answer |
+| `api.weatherapi.com/v1/{current,forecast}.json` | weather widget | `dex-edge`, `weather.json` |
+| `cdn.weatherapi.com/weather/**` | weather icons | `dex-edge`, mirrored `selfhost/edge/icons` |
+
+No analytics, telemetry, crash reporting, Firebase, Sentry or ad SDK exists in the desktop bundle
+or in the companion APK (`strings` across `libapp.so`, the Rust core, every jar and `classes.dex`).
+The phone app makes no network calls at all: the desktops drive it over adb.
+
+`selfhost/edge/` replaces all four hosts with a local TLS shim (own CA, 127.0.0.1:443), so the app
+needs no DNS or internet. Install with `./selfhost/edge/install-edge.sh host` (oracle) and
+`./selfhost/edge/push-to-macbook.sh` (macbook). Rollback: drop the `# dex-edge` lines from
+`/etc/hosts` and stop `dex-edge`.
+
+Still third-party by design: links you click (YouTube, Wikipedia, Reddit, GitHub, the buy-me-a-coffee
+button, and the Brave/Google/Perplexity search widgets) open in the browser, so those go out from
+whichever machine — and they work offline-by-host-block only in the sense that a blocked host means
+the page fails.

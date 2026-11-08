@@ -1,0 +1,15 @@
+[Unit]
+Description=dex-edge: local stand-in for Android DEX's third-party hosts
+After=network-online.target
+
+[Service]
+Type=simple
+User=josh
+Group=josh
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+Environment=HOME=/home/josh
+ExecStart=/usr/bin/python3 /home/josh/Projects/android-dex/selfhost/edge/dex-edge.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

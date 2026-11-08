@@ -40,6 +40,7 @@ if [ "$(uname -s)" = Darwin ]; then
   <key>StandardErrorPath</key><string>/tmp/dex-edge-trust.log</string>
 </dict></plist>
 PLIST
+  launchctl remove dexedge-trust 2>/dev/null || true   # stray transient job: respawns every 10 s, and each respawn writes trust settings (prompt storm)
   launchctl bootout gui/"$(id -u)"/au.bilson.dex-edge-trust 2>/dev/null || true
   launchctl bootstrap gui/"$(id -u)" /Library/LaunchAgents/au.bilson.dex-edge-trust.plist
   if "$HOME/.local/libexec/dex-edge-ensure-trust"; then

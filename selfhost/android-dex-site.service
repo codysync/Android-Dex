@@ -1,0 +1,13 @@
+[Unit]
+Description=Android DEX self-hosted site + release mirror (tailnet)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/josh/Projects/android-dex
+ExecStartPre=/home/josh/Projects/android-dex/selfhost/build-www.sh
+ExecStart=/usr/bin/python3 -m http.server 8799 --bind 127.0.0.1 --directory /mnt/scratch/android-dex/www
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

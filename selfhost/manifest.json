@@ -1,0 +1,21 @@
+{
+  "assets": {
+    "AndroidDex.apk": {
+      "bytes": 44181132,
+      "sha256": "ccc18d2178ebdae933509c9076ef1ce90936b1fef7821f908e965917c4df718a"
+    },
+    "Android_Dex_Linux_x64.zip": {
+      "bytes": 219919165,
+      "sha256": "d25b5d6588c1f48d40c9f6521a9b5f5d33a10b358b69e3023c38ba4c5758b643"
+    },
+    "Android_Dex_Windows.zip": {
+      "bytes": 231085700,
+      "sha256": "c4b32f568baf88db4e8881851929383a7435ac4bd449bc925b3ed586ff508d00"
+    },
+    "Android_Dex_macOS.zip": {
+      "bytes": 231131781,
+      "sha256": "681a34a566879561becf7288b2e1e5c37e3e941f0404af4e682331db1f5451bb"
+    }
+  },
+  "tag": "Android-Dex-v.1.5"
+}
